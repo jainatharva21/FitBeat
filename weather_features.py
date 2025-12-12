@@ -12,7 +12,6 @@ def parse_latlng(latlng_str):
     if pd.isna(latlng_str):
         return None, None
     try:
-        # safely evaluate the string as a Python list
         coords = ast.literal_eval(latlng_str)
         if isinstance(coords, (list, tuple)) and len(coords) == 2:
             return float(coords[0]), float(coords[1])
@@ -22,7 +21,7 @@ def parse_latlng(latlng_str):
 
 
 def fetch_weather_for_run(lat, lon, run_dt):
-    # If no valid coordinates, skip
+    # If no valid coords, skip
     if lat is None or lon is None:
         return {
             "temp": None,
@@ -33,7 +32,6 @@ def fetch_weather_for_run(lat, lon, run_dt):
         }
 
     # Visual Crossing timeline API endpoint
-    # We'll query for the day of the run and then match the hour.
     date_str = run_dt.strftime("%Y-%m-%d")
     location = f"{lat},{lon}"
 
